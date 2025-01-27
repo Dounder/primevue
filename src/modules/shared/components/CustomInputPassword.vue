@@ -6,47 +6,39 @@ interface Props {
   label?: string
   modelValue?: string
   placeholder?: string
-  size?: 'large' | 'small'
-  variant?: 'outlined' | 'filled'
   loading?: boolean
-  feedback?: boolean
   toggleMask?: boolean
   invalid?: boolean
   autofocus?: boolean
 }
-
-withDefaults(defineProps<Props>(), {
-  feedback: false,
-  toggleMask: true
-})
-
-defineEmits(['update:modelValue', 'blur'])
+withDefaults(defineProps<Props>(), { toggleMask: true })
+defineEmits(['update:modelValue', 'blur', 'change', 'input'])
 </script>
 
 <template>
-  <div class="flex flex-col gap-2">
-    <label v-if="label" :for="id">{{ label }}</label>
-    <Password
-      :id="id"
-      :model-value="modelValue"
-      @input="$emit('update:modelValue', ($event.target as HTMLInputElement)?.value || '')"
-      @blur="$emit('blur')"
-      :aria-describedby="`${id}-help`"
-      :invalid="invalid || Boolean(error)"
-      :placeholder="placeholder"
-      :size="size"
-      :variant="variant"
-      fluid
-      :disabled="disabled"
-      :loading="loading"
-      :feedback="feedback"
-      :toggle-mask="toggleMask"
-      :autofocus="autofocus"
-    />
-    <transition name="p-message" tag="div" class="flex flex-col">
+  <article>
+    <FloatLabel variant="in">
+      <Password
+        :id="id"
+        :model-value="modelValue"
+        @input="$emit('update:modelValue', ($event.target as HTMLInputElement)?.value || '')"
+        @blur="$emit('blur')"
+        :aria-describedby="`${id}-help`"
+        :invalid="invalid || Boolean(error)"
+        :placeholder="placeholder"
+        fluid
+        :disabled="disabled"
+        :loading="loading"
+        :feedback="false"
+        :toggle-mask="toggleMask"
+        :autofocus="autofocus"
+      />
+      <label v-if="label" :for="id">{{ label }}</label>
+    </FloatLabel>
+    <transition name="p-message" tag="div" class="flex flex-col mt-2">
       <Message v-if="error" severity="error">{{ error }}</Message>
     </transition>
-  </div>
+  </article>
 </template>
 
 <style scoped>

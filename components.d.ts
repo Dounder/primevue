@@ -10,6 +10,8 @@ declare module 'vue' {
     Badge: typeof import('primevue/badge')['default']
     Button: typeof import('primevue/button')['default']
     Card: typeof import('primevue/card')['default']
+    FloatLabel: typeof import('primevue/floatlabel')['default']
+    IftaLabel: typeof import('primevue/iftalabel')['default']
     InputNumber: typeof import('primevue/inputnumber')['default']
     InputText: typeof import('primevue/inputtext')['default']
     Menu: typeof import('primevue/menu')['default']
@@ -24,5 +26,6 @@ declare module 'vue' {
   export interface ComponentCustomProperties {
     FocusTrap: typeof import('primevue/focustrap')['default']
     Ripple: typeof import('primevue/ripple')['default']
+    Tooltip: typeof import('primevue/tooltip')['default']
   }
 }
