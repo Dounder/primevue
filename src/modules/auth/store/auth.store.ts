@@ -4,7 +4,7 @@ import { useToast } from 'primevue/usetoast'
 import { computed, ref } from 'vue'
 
 import { checkAuthAction, loginAction } from '../actions'
-import { AuthStatus, UserRoles, type User } from '../interfaces'
+import { AuthStatus, type User } from '../interfaces'
 
 export const useAuthStore = defineStore('auth', () => {
   const toast = useToast()
@@ -81,7 +81,8 @@ export const useAuthStore = defineStore('auth', () => {
     // Getters
     isChecking: computed(() => authStatus.value === AuthStatus.Checking),
     isAuthenticated: computed(() => authStatus.value === AuthStatus.Authenticated),
-    isAdmin: computed(() => user.value?.roles.includes(UserRoles.Admin) ?? false),
+    //! Replace this with your own logic
+    isAdmin: computed(() => user.value?.roles.some((role) => role.name === 'Name') ?? false),
     username: computed(() => user.value?.username),
     userRoles: computed(() => user.value?.roles),
 

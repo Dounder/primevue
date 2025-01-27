@@ -1,6 +1,7 @@
 import { isAxiosError } from 'axios'
 import type { AuthResponse, LoginError, LoginSuccess } from '../interfaces'
 import { api } from '@/api/api'
+import { exceptionHandler } from '@/modules/shared'
 
 export const loginAction = async (
   username: string,
@@ -12,9 +13,8 @@ export const loginAction = async (
     return { ok: true, message: 'ok', user: data.user, token: data.token }
   } catch (error) {
     if (isAxiosError(error) && error.response?.status === 401)
-      return { ok: false, message: 'Credenciales incorrectas' }
+      return { ok: false, message: 'Credentials are invalid' }
 
-    console.error(error)
-    throw new Error('Ocurrió un error inesperado')
+    throw exceptionHandler(error, loginAction.name)
   }
 }

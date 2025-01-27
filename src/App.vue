@@ -1,18 +1,19 @@
 <script setup lang="ts">
-import FullscreenLoader from '@shared/components/FullscreenLoader.vue'
-import { useConfigStore } from '@shared/stores/config.store'
 import { VueQueryDevtools } from '@tanstack/vue-query-devtools'
 import { useRoute, useRouter } from 'vue-router'
+
+import FullscreenLoader from '@shared/components/FullscreenLoader.vue'
+import { useConfigStore } from '@shared/stores/config.store'
 import { AuthStatus } from './modules/auth/interfaces'
 import { useAuthStore } from './modules/auth/store/auth.store'
 
-const authStore = useAuthStore()
 const router = useRouter()
 const route = useRoute()
-const { setAppTheme } = useConfigStore()
 
+const { setAppTheme } = useConfigStore()
 setAppTheme()
 
+const authStore = useAuthStore()
 authStore.$subscribe(
   async (_, state) => {
     if (route.path.includes('/auth') && state.authStatus === AuthStatus.Authenticated) {
@@ -20,13 +21,9 @@ authStore.$subscribe(
       return
     }
 
-    if (authStore.authStatus === AuthStatus.Unauthenticated) {
-      router.replace({ name: 'auth.login' })
-    }
+    if (authStore.authStatus === AuthStatus.Unauthenticated) router.replace({ name: 'auth.login' })
   },
-  {
-    immediate: true
-  }
+  { immediate: true }
 )
 </script>
 

@@ -1,7 +1,9 @@
-import { UserRoles } from '@/modules/auth/interfaces'
+import type { Role } from '@/modules/auth'
+import { filterMenuItems } from '@/modules/shared'
 import { PrimeIcons as icons } from '@primevue/core/api'
-import type { MenuItem } from 'primevue/menuitem'
 
-export const getMenuOptions = (userRoles: UserRoles[]): MenuItem[] => [
-  { icon: icons.HOME, route: { name: 'home' } }
-]
+export const getMenuOptions = (userRoles: Role[]) => {
+  const menuItems = [{ icon: icons.HOME, mobile: 'Home', route: { name: 'home' } }]
+
+  return filterMenuItems(menuItems, userRoles)
+}
