@@ -5,41 +5,33 @@ interface Props {
   id: string
   label?: string
   modelValue?: string
-  placeholder?: string
-  size?: 'large' | 'small'
-  variant?: 'outlined' | 'filled'
   loading?: boolean
   invalid?: boolean
   autofocus?: boolean
 }
-
 defineProps<Props>()
-
-defineEmits(['update:modelValue', 'blur'])
+defineEmits(['update:modelValue', 'blur', 'change', 'input'])
 </script>
 
 <template>
-  <div class="flex flex-col gap-2">
-    <label v-if="label" :for="id">{{ label }}</label>
+  <IftaLabel>
     <InputText
       :id="id"
       :model-value="modelValue"
       @input="$emit('update:modelValue', ($event.target as HTMLInputElement)?.value || '')"
       @blur="$emit('blur')"
-      :aria-describedby="`${id}-help`"
       :invalid="invalid || Boolean(error)"
-      :placeholder="placeholder"
-      :size="size"
-      :variant="variant"
-      fluid
       :disabled="disabled"
       :loading="loading"
       :autofocus="autofocus"
+      size="large"
+      fluid
     />
-    <transition name="p-message" tag="div" class="flex flex-col">
+    <label v-if="label" :for="id">{{ label }}</label>
+    <transition name="p-message" tag="div" class="flex flex-col mt-2">
       <Message v-if="error" severity="error">{{ error }}</Message>
     </transition>
-  </div>
+  </IftaLabel>
 </template>
 
 <style scoped>

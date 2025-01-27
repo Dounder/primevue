@@ -3,7 +3,12 @@ export interface ApiListResponse<T> {
   data: T[]
 }
 
-export interface ApiListMeta {
+interface ApiListMeta {
   total: number
   lastPage: number
+}
+
+export interface DeletionToggle {
+  id: string
+  isDeleted: boolean
 }

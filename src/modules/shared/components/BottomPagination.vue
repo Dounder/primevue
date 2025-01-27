@@ -1,19 +1,21 @@
 <script setup lang="ts">
 import { PrimeIcons as icons } from '@primevue/core/api'
-import { computed, ref } from 'vue'
+import { storeToRefs } from 'pinia'
+import { computed } from 'vue'
 
-interface Props {
-  totalRecords: number
-  page: number
-  lastPage: number
-}
+import { usePaginationStore } from '../stores'
+import { useConfigStore } from '../stores/config.store'
+import CustomButton from './CustomButton.vue'
 
-const props = defineProps<Props>()
-const isMobile = ref(window.innerWidth <= 768)
+const paginationStore = usePaginationStore()
+const { page, lastPage } = storeToRefs(paginationStore)
+const configStore = useConfigStore()
+const { isMobile } = storeToRefs(configStore)
+
 const visiblePages = computed(() => {
   const visible = []
-  const startPage = Math.max(1, props.page - 2)
-  const endPage = Math.min(props.lastPage, props.page + 2)
+  const startPage = Math.max(1, page.value - 2)
+  const endPage = Math.min(lastPage.value, page.value + 2)
 
   for (let i = startPage; i <= endPage; i++) visible.push(i)
 
@@ -22,52 +24,44 @@ const visiblePages = computed(() => {
 </script>
 
 <template>
-  <div class="flex justify-center items-center py-10 gap-2" v-if="lastPage > 1">
-    <Button
+  <article class="flex justify-center items-center gap-2" v-if="lastPage > 1">
+    <CustomButton
       text
-      rounded
       :icon="icons.ANGLE_DOUBLE_LEFT"
       :disabled="page === 1"
       @click="$router.push({ query: { page: 1 } })"
     />
-    <Button
+
+    <CustomButton
       text
-      rounded
       :icon="icons.ANGLE_LEFT"
       :disabled="page === 1"
       @click="$router.push({ query: { page: page - 1 } })"
     />
 
-    <span v-if="isMobile" class="mx-4 dark:text-muted-color">
-      Página {{ page }} de {{ lastPage }}
-    </span>
+    <span v-if="isMobile" class="mx-4 dark:text-muted-color">{{ page }} de {{ lastPage }}</span>
 
     <Button
       v-else
       v-for="p in visiblePages"
       :key="p"
       :text="page !== p"
-      rounded
       class="w-10"
       @click="$router.push({ query: { page: p } })"
       :label="p.toString()"
     />
 
-    <Button
+    <CustomButton
       text
-      rounded
       :icon="icons.ANGLE_RIGHT"
       :disabled="page === lastPage"
       @click="$router.push({ query: { page: page + 1 } })"
     />
-    <Button
+    <CustomButton
       text
-      rounded
       :icon="icons.ANGLE_DOUBLE_RIGHT"
       :disabled="page === lastPage"
       @click="$router.push({ query: { page: lastPage } })"
     />
-  </div>
+  </article>
 </template>
-
-<style scoped></style>
