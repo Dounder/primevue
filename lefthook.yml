@@ -1,0 +1,49 @@
+# Pre-commit hooks - run on every commit
+pre-commit:
+  parallel: true
+  commands:
+    # Lint TypeScript files with ESLint and auto-fix issues
+    lint:
+      glob: 'src/**/*.{ts,vue}'
+      run: bun run lint -- {staged_files}
+      stage_fixed: true
+      fail_text: 'ESLint found issues. Please fix them before committing.'
+
+    # Format files with Prettier
+    format:
+      glob: '*.{js,ts,json,md,yml,yaml,vue,css}'
+      run: bun run format
+      stage_fixed: true
+      fail_text: 'Prettier formatting failed.'
+
+    # Type check TypeScript files
+    type-check:
+      glob: 'src/**/*.{ts,vue}'
+      run: bun run type-check
+      fail_text: 'TypeScript compilation failed. Please fix type errors before committing.'
+
+# Pre-push hooks - run before pushing to remote
+pre-push:
+  parallel: true
+  commands:
+    # Run unit tests before pushing
+    # test:
+    #   run: bun run test:unit
+    #   fail_text: 'Tests failed. Please fix failing tests before pushing.'
+
+    # Run full linting check on all files
+    lint-all:
+      run: bun run lint
+      fail_text: 'Full project linting failed. Please fix all linting errors before pushing.'
+
+# Commit message validation
+commit-msg:
+  commands:
+    commitlint:
+      run: bunx commitlint --edit {1}
+      fail_text: 'Commit message format is invalid. Use conventional commits format.'
+
+# Skip hooks for specific operations
+skip_output:
+  - meta
+  - summary
