@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useTheme } from '@/common'
+import { useTheme } from '@/common';
 
-useTheme()
+useTheme();
 </script>
 
 <template>

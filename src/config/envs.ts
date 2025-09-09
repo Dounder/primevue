@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import { z } from 'zod';
 
 /**
  * Schema for validating environment variables using Zod.
@@ -15,14 +15,15 @@ import { z } from 'zod'
  * ```
  */
 const envSchema = z
-  .object({
-    VITE_API_URL: z.string().min(1, 'VITE_API_URL is required'),
-  })
-  .loose()
+	.object({
+		VITE_API_URL: z.string().min(1, 'VITE_API_URL is required'),
+	})
+	.loose();
 
-const result = envSchema.safeParse(import.meta.env)
+const result = envSchema.safeParse(import.meta.env);
 
-if (!result.success) throw new Error(`Config validation error: ${result.error.message}`)
+if (!result.success)
+	throw new Error(`Config validation error: ${result.error.message}`);
 
 /**
  * Environment configuration object.
@@ -32,7 +33,7 @@ if (!result.success) throw new Error(`Config validation error: ${result.error.me
  * @property {boolean} isDev - Boolean flag indicating if application is in development mode
  */
 export const envs = {
-  apiUrl: result.data.VITE_API_URL,
-  mode: import.meta.env.MODE,
-  isDev: import.meta.env.DEV,
-}
+	apiUrl: result.data.VITE_API_URL,
+	mode: import.meta.env.MODE,
+	isDev: import.meta.env.DEV,
+};

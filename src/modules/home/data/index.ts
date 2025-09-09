@@ -1,1 +1,1 @@
-export * from './home-menu.data'
+export * from './home-menu.data';

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { HomeToolbar } from '../components'
+import { HomeToolbar } from '../components';
 </script>
 
 <template>

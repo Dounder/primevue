@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import type { MenuMethods } from 'primevue/menu'
-import { ref } from 'vue'
-import { homeMenuItems } from '../data'
+import type { MenuMethods } from 'primevue/menu';
+import { ref } from 'vue';
+import { homeMenuItems } from '../data';
 
-const menu = ref<MenuMethods | null>(null)
+const menu = ref<MenuMethods | null>(null);
 
 const toggle = (event: MouseEvent) => {
-  console.log('Menu toggled', event)
-  menu.value?.toggle(event)
-}
+	console.log('Menu toggled', event);
+	menu.value?.toggle(event);
+};
 
-defineExpose({ toggle })
+defineExpose({ toggle });
 </script>
 
 <template>

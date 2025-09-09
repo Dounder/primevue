@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { useTheme } from '@/common'
-import { UserMenu } from './'
-import { cn } from '@/common/utils'
+import { useTheme } from '@/common';
+import { cn } from '@/common/utils';
+import { UserMenu } from './';
 
-const { toggle, isDarkMode } = useTheme()
+const { toggle, isDarkMode } = useTheme();
 </script>
 
 <template>
