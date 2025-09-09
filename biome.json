@@ -1,55 +1,55 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.2.3/schema.json",
-  "vcs": {
-    "enabled": true,
-    "clientKind": "git",
-    "useIgnoreFile": true
-  },
-  "files": {
-    "ignoreUnknown": false
-  },
-  "formatter": {
-    "enabled": true,
-    "indentStyle": "tab"
-  },
-  "linter": {
-    "enabled": true,
-    "rules": {
-      "recommended": true,
-      "complexity": {
-        "noExcessiveCognitiveComplexity": "off"
-      },
-      "correctness": {
-        "noUnusedVariables": "off",
-        "noUnusedImports": "off"
-      },
-      "style": {
-        "noNonNullAssertion": "off"
-      },
-      "suspicious": {
-        "noExplicitAny": "off",
-        "noAssignInExpressions": "off",
-        "noUnknownAtRules": "off"
-      }
-    }
-  },
-  "javascript": {
-    "formatter": {
-      "quoteStyle": "single"
-    },
-    "globals": ["$ref", "$computed", "$fromRefs"]
-  },
-  "css": {
-    "linter": {
-      "enabled": true
-    }
-  },
-  "assist": {
-    "enabled": true,
-    "actions": {
-      "source": {
-        "organizeImports": "on"
-      }
-    }
-  }
+	"$schema": "https://biomejs.dev/schemas/2.2.3/schema.json",
+	"vcs": {
+		"enabled": true,
+		"clientKind": "git",
+		"useIgnoreFile": true
+	},
+	"files": {
+		"ignoreUnknown": false
+	},
+	"formatter": {
+		"enabled": true,
+		"indentStyle": "tab"
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": true,
+			"complexity": {
+				"noExcessiveCognitiveComplexity": "off"
+			},
+			"correctness": {
+				"noUnusedVariables": "off",
+				"noUnusedImports": "off"
+			},
+			"style": {
+				"noNonNullAssertion": "off"
+			},
+			"suspicious": {
+				"noExplicitAny": "off",
+				"noAssignInExpressions": "off",
+				"noUnknownAtRules": "off"
+			}
+		}
+	},
+	"javascript": {
+		"formatter": {
+			"quoteStyle": "single"
+		},
+		"globals": ["$ref", "$computed", "$fromRefs"]
+	},
+	"css": {
+		"linter": {
+			"enabled": true
+		}
+	},
+	"assist": {
+		"enabled": true,
+		"actions": {
+			"source": {
+				"organizeImports": "on"
+			}
+		}
+	}
 }
