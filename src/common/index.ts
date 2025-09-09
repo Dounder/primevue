@@ -1,2 +1,2 @@
-export * from './compables'
+export * from './composables'
 export * from './types'

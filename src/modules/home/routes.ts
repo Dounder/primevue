@@ -1,8 +1,16 @@
 import type { RouteRecordRaw } from 'vue-router'
+import { HomeLayout } from './layout'
 
 export const HOME_ROUTES: RouteRecordRaw = {
   path: '/',
-  alias: '/home',
-  name: 'home',
-  component: () => import('./pages/HomePage.vue'),
+  name: 'home.layout',
+  component: HomeLayout,
+  children: [
+    {
+      path: '',
+      alias: 'home',
+      name: 'home.page',
+      component: () => import('./pages/HomePage.vue'),
+    },
+  ],
 }
